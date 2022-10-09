@@ -13,39 +13,35 @@ class BannerPet extends StatelessWidget {
     return Stack(
       children: [
         Container(
+          height: 250,
           width: double.infinity,
+          child: pet.image != null
+              ? Hero(
+                  tag: pet.id,
+                  child: Image.file(
+                    pet.image!,
+                    fit: BoxFit.cover,
+                  ),
+                )
+              : Container(),
         ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: 220,
-          color: Color.fromARGB(255, 24, 16, 64),
-          child: Column(
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 5,
-                    bottom: 5,
-                  ),
-                  child: Container(
-                    height: 120,
-                    width: 120,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(120),
-                    ),
-                    child: pet.image != null
-                        ? ClipRRect(
-                            borderRadius: BorderRadius.circular(120),
-                            child: Image.file(
-                              pet.image!,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                        : Container(),
-                  ),
-                ),
+        Positioned(
+          top: 180,
+          child: Container(
+            height: 70,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [
+                  Color.fromRGBO(0, 0, 0, 0.6),
+                  Color.fromRGBO(0, 0, 0, 0),
+                ],
               ),
-              Row(
+            ),
+            child: Center(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
@@ -65,13 +61,13 @@ class BannerPet extends StatelessWidget {
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
         Column(
           children: [
             SizedBox(
-              height: 200,
+              height: 230,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -131,7 +127,7 @@ class BannerPet extends StatelessWidget {
               ],
             ),
           ],
-        )
+        ),
       ],
     );
   }

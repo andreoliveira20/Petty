@@ -28,11 +28,14 @@ class CardPet extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100),
                   ),
                   child: pet.image != null
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(120),
-                          child: Image.file(
-                            pet.image!,
-                            fit: BoxFit.cover,
+                      ? Hero(
+                          tag: pet.id,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(120),
+                            child: Image.file(
+                              pet.image!,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         )
                       : Container(),

@@ -23,7 +23,6 @@ class PetList with ChangeNotifier {
           ),
         )
         .toList();
-    print('carregou');
   }
 
   int get petsCount => _pets.length;

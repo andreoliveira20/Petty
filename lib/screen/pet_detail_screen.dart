@@ -42,10 +42,6 @@ class _PetDetailScreenState extends State<PetDetailScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 24, 16, 64),
-        iconTheme: IconThemeData(color: Colors.white),
-      ),
       body: Container(
         color: Color.fromARGB(255, 230, 230, 230),
         child: Column(
