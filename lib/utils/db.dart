@@ -12,7 +12,7 @@ class DbUtil {
         await db.execute(
             'CREATE TABLE vaccine (id TEXT PRIMARY KEY, vaccinename TEXT, petid TEXT)');
         await db.execute(
-            'CREATE TABLE vaccinedate (id TEXT PRIMARY KEY, vaccineid TEXT, vaccinedate TEXT)');
+            'CREATE TABLE vaccinedate (id TEXT PRIMARY KEY, vaccineid TEXT, vaccinedate TEXT, vaccinedatelimit TEXT)');
         await db.execute(
             'CREATE TABLE user (id TEXT PRIMARY KEY, name TEXT, image TEXT)');
         await db.insert('user', {'id': '1', 'name': 'Usuario'});

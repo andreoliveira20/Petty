@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:petty/models/vaccine_date_model.dart';
 import 'package:petty/models/vaccine_model.dart';
@@ -14,39 +15,62 @@ class VaccineFormDate extends StatefulWidget {
   State<VaccineFormDate> createState() => _VaccineFormState();
 }
 
+enum dateTimeMonth {
+  threeMonth,
+  sixMonth,
+  TwenthMonth,
+}
+
 class _VaccineFormState extends State<VaccineFormDate> {
   DateTime _selectedDate = DateTime.now();
+  var dayTime = '${DateFormat('dd').format(
+    DateTime.now(),
+  )}';
+  var monthTime = '${DateFormat('MM').format(
+    DateTime.now(),
+  )}';
+  var yearTime = '${DateFormat('y').format(
+    DateTime.now(),
+  )}';
 
-  // _showDatePicker() {
-  //   showDatePicker(
-  //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime(2020),
-  //     lastDate: DateTime.now(),
-  //   ).then((pickedDate) {
-  //     if (pickedDate == null) {
-  //       return;
-  //     }
-  //     setState(() {
-  //       _selectedDate = pickedDate;
-  //     });
-  //   });
-  // }
+  var _dateLimit = '3';
 
-  VaccineModelDate _submitVaccine(String vaccineId, DateTime date) {
+  VaccineModelDate _submitVaccine(
+      String vaccineId, DateTime date, String dateLimit) {
     VaccineModelDate vaccineDate = VaccineModelDate(
       id: Random().nextDouble().toString(),
       vaccineId: vaccineId,
       date: date,
+      dateLimit: dateLimit,
     );
 
     return vaccineDate;
   }
 
+  void ConvertdateLimit() {
+    if (timeMonth == dateTimeMonth.threeMonth) {
+      _dateLimit = '3';
+      return;
+    }
+    if (timeMonth == dateTimeMonth.sixMonth) {
+      _dateLimit = '6';
+      return;
+    }
+    if (timeMonth == dateTimeMonth.TwenthMonth) {
+      _dateLimit = '12';
+      return;
+    }
+  }
+
+  dateTimeMonth timeMonth = dateTimeMonth.threeMonth;
+
   @override
   Widget build(BuildContext context) {
     _submitForm() {
-      final vaccineDate = _submitVaccine(widget.vaccine.id, _selectedDate);
+      ConvertdateLimit();
+      _selectedDate = DateTime.parse('${yearTime}${monthTime}${dayTime}');
+      final vaccineDate =
+          _submitVaccine(widget.vaccine.id, _selectedDate, _dateLimit);
 
       widget.addVaccine(vaccineDate);
       Navigator.of(context).pop();
@@ -57,16 +81,79 @@ class _VaccineFormState extends State<VaccineFormDate> {
         children: [
           Text('Data da aplicacao'),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 120),
-            child: TextFormField(
-              initialValue: '${DateFormat('dd/MM/y').format(
-                _selectedDate,
-              )}',
-              keyboardType: TextInputType.datetime,
-              decoration: InputDecoration(
-                hintText: 'DD/MM/YYYY',
-                counterText: '',
-              ),
+            padding: const EdgeInsets.symmetric(horizontal: 128),
+            child: Row(
+              children: [
+                Flexible(
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    autocorrect: false,
+                    enableSuggestions: false,
+                    maxLength: 2,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    onChanged: (String value) {
+                      dayTime = value;
+                    },
+                    decoration: InputDecoration(
+                      counterText: '',
+                    ),
+                    keyboardType: TextInputType.datetime,
+                    initialValue: '${DateFormat('dd').format(
+                      _selectedDate,
+                    )}',
+                  ),
+                ),
+                Text(
+                  '/',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                Flexible(
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    autocorrect: false,
+                    enableSuggestions: false,
+                    maxLength: 2,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    onChanged: (String value) {
+                      monthTime = value;
+                    },
+                    decoration: InputDecoration(
+                      counterText: '',
+                    ),
+                    keyboardType: TextInputType.datetime,
+                    initialValue: '${DateFormat('MM').format(
+                      _selectedDate,
+                    )}',
+                  ),
+                ),
+                Text(
+                  '/',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                Flexible(
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    autocorrect: false,
+                    enableSuggestions: false,
+                    maxLength: 4,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    onChanged: (String value) {
+                      yearTime = value;
+                    },
+                    decoration: InputDecoration(
+                      counterText: '',
+                    ),
+                    keyboardType: TextInputType.datetime,
+                    initialValue: '${DateFormat('y').format(
+                      _selectedDate,
+                    )}',
+                  ),
+                ),
+              ],
             ),
           ),
           SizedBox(
@@ -76,9 +163,16 @@ class _VaccineFormState extends State<VaccineFormDate> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  setState(() {
+                    timeMonth = dateTimeMonth.threeMonth;
+                  });
+                },
                 child: Container(
                   decoration: BoxDecoration(
+                    color: timeMonth == dateTimeMonth.threeMonth
+                        ? Color.fromARGB(255, 255, 120, 1)
+                        : null,
                     border: Border.all(
                       width: 1,
                     ),
@@ -88,9 +182,16 @@ class _VaccineFormState extends State<VaccineFormDate> {
                 ),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  setState(() {
+                    timeMonth = dateTimeMonth.sixMonth;
+                  });
+                },
                 child: Container(
                   decoration: BoxDecoration(
+                    color: timeMonth == dateTimeMonth.sixMonth
+                        ? Color.fromARGB(255, 255, 120, 1)
+                        : null,
                     border: Border.all(
                       width: 1,
                     ),
@@ -100,9 +201,16 @@ class _VaccineFormState extends State<VaccineFormDate> {
                 ),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  setState(() {
+                    timeMonth = dateTimeMonth.TwenthMonth;
+                  });
+                },
                 child: Container(
                   decoration: BoxDecoration(
+                    color: timeMonth == dateTimeMonth.TwenthMonth
+                        ? Color.fromARGB(255, 255, 120, 1)
+                        : null,
                     border: Border.all(
                       width: 1,
                     ),
@@ -112,58 +220,25 @@ class _VaccineFormState extends State<VaccineFormDate> {
                 ),
               )
             ],
-          )
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+            onPressed: _submitForm,
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Text(
+                'Registrar',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 }
-
-
-// return Card(
-//       child: Column(
-//         children: [
-//           Text('Data da aplicacao'),
-//           Container(
-//             height: 70,
-//             child: Row(
-//               children: [
-//                 Expanded(
-//                   child: Text(_selectedDate == null
-//                       ? 'selecionar data'
-//                       : 'Data selecionada ${DateFormat('dd/MM/y').format(
-//                           _selectedDate,
-//                         )}'),
-//                 ),
-//                 TextButton(
-//                   onPressed: _showDatePicker,
-//                   child: Text(
-//                     'Selecionar Data',
-//                     style: TextStyle(
-//                       fontWeight: FontWeight.bold,
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.end,
-//             children: [
-//               Container(
-//                 color: Colors.blue,
-//                 child: TextButton(
-//                   onPressed: _submitForm,
-//                   child: Text(
-//                     'Adicionar',
-//                     style: TextStyle(
-//                       color: Colors.white,
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     );

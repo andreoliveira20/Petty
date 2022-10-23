@@ -14,6 +14,7 @@ class VaccineDateList with ChangeNotifier {
             id: item['id'],
             vaccineId: item['vaccineid'],
             date: DateTime.parse(item['vaccinedate']),
+            dateLimit: item['vaccinedatelimit'],
           ),
         )
         .toList()
@@ -31,6 +32,7 @@ class VaccineDateList with ChangeNotifier {
       'id': vaccineDate.id,
       'vaccineid': vaccineDate.vaccineId,
       'vaccinedate': vaccineDate.date.toString(),
+      'vaccinedatelimit': vaccineDate.dateLimit,
     });
     notifyListeners();
   }

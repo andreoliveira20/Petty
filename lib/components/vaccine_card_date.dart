@@ -27,6 +27,7 @@ class VaccineCardDate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int dateLimit = int.parse(vaccineDate.dateLimit) * 30;
     bool dateExpired = dateExpiredFunction();
 
     return Container(
@@ -75,7 +76,7 @@ class VaccineCardDate extends StatelessWidget {
                     ),
                   ),
                   Text('${DateFormat('dd/MM/y').format(
-                    vaccineDate.date.add(Duration(days: 365)),
+                    vaccineDate.date.add(Duration(days: dateLimit)),
                   )}'),
                 ],
               ),

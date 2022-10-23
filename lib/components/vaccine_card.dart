@@ -19,12 +19,45 @@ class VaccineCard extends StatefulWidget {
   State<VaccineCard> createState() => _VaccineCardState();
 }
 
-class _VaccineCardState extends State<VaccineCard> {
+class _VaccineCardState extends State<VaccineCard>
+    with SingleTickerProviderStateMixin {
   bool isSelected = false;
+
+  AnimationController? _controller;
+  Animation<double>? _opacityAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 300),
+    );
+
+    _opacityAnimation = Tween(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller!,
+        curve: Curves.linear,
+      ),
+    );
+
+    _controller!.forward();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller?.dispose();
+  }
 
   void vaccineSelectedFunction() {
     setState(() {
       isSelected = !isSelected;
+      isSelected ? _controller!.forward() : _controller!.reverse();
     });
   }
 
@@ -32,6 +65,8 @@ class _VaccineCardState extends State<VaccineCard> {
   Widget build(BuildContext context) {
     final provider = Provider.of<VaccineList>(context);
     final vaccineDate = Provider.of<VaccineDateList>(context);
+    final count = vaccineDate.vaccineDateCount;
+
     openTransactionFormModal(BuildContext context) {
       showModalBottomSheet(
           context: context,
@@ -83,33 +118,44 @@ class _VaccineCardState extends State<VaccineCard> {
               ),
             ),
           ),
-          SizedBox(
-            height: isSelected ? 200 : 0,
-            child: Column(
-              children: [
-                FutureBuilder(
-                  future: vaccineDate.loadVaccineDate(widget.vaccine),
-                  builder: (BuildContext context, snapshot) => snapshot
-                              .connectionState ==
-                          ConnectionState.waiting
-                      ? Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : Expanded(
-                          child: ListView.builder(
-                            itemCount: vaccineDate.vaccineDateCount,
-                            itemBuilder: (context, index) => VaccineCardDate(
-                              vaccineDate: vaccineDate.vaccineDateList[index],
-                              onRemove: vaccineDate.deleteVaccineDate,
-                            ),
-                          ),
-                        ),
+          SingleChildScrollView(
+            child: AnimatedContainer(
+              duration: Duration(milliseconds: 300),
+              constraints: BoxConstraints(
+                minHeight: isSelected ? 60 : 0,
+                maxHeight: isSelected ? 200 : 0,
+              ),
+              curve: Curves.linear,
+              child: FadeTransition(
+                opacity: _opacityAnimation!,
+                child: Column(
+                  children: [
+                    FutureBuilder(
+                      future: vaccineDate.loadVaccineDate(widget.vaccine),
+                      builder: (BuildContext context, snapshot) =>
+                          snapshot.connectionState == ConnectionState.waiting
+                              ? Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : Expanded(
+                                  child: ListView.builder(
+                                    itemCount: vaccineDate.vaccineDateCount,
+                                    itemBuilder: (context, index) =>
+                                        VaccineCardDate(
+                                      vaccineDate:
+                                          vaccineDate.vaccineDateList[index],
+                                      onRemove: vaccineDate.deleteVaccineDate,
+                                    ),
+                                  ),
+                                ),
+                    ),
+                    IconButton(
+                      onPressed: () => openTransactionFormModal(context),
+                      icon: Icon(Icons.add),
+                    ),
+                  ],
                 ),
-                IconButton(
-                  onPressed: () => openTransactionFormModal(context),
-                  icon: Icon(Icons.add),
-                ),
-              ],
+              ),
             ),
           ),
         ],

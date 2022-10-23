@@ -16,8 +16,6 @@ class Users with ChangeNotifier {
               image: File(item['image']),
             ))
         .toList();
-
-    print('${_user} loaduser');
   }
 
   List<User> get user => [..._user];
