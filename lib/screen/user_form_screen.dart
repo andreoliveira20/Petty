@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import '../provider/user.dart';
 
 class UserFormScreen extends StatefulWidget {
+  const UserFormScreen({Key? key}) : super(key: key);
+
   @override
   State<UserFormScreen> createState() => _UserFormScreenState();
 }
@@ -54,9 +56,9 @@ class _UserFormScreenState extends State<UserFormScreen> {
     }
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 230, 230, 230),
+      backgroundColor: const Color.fromARGB(255, 230, 230, 230),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 230, 230, 230),
+        backgroundColor: const Color.fromARGB(255, 230, 230, 230),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -64,24 +66,24 @@ class _UserFormScreenState extends State<UserFormScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Novo Usuario',
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 'Criar Conta',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Center(
@@ -103,7 +105,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
                             )
                           : IconButton(
                               onPressed: _takePictureGallery,
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.add,
                                 size: 30,
                               ),
@@ -115,7 +117,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
                       bottom: 0,
                       child: IconButton(
                         onPressed: _takePictureCamera,
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.camera_alt,
                           size: 30,
                         ),
@@ -124,7 +126,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Padding(
@@ -136,12 +138,12 @@ class _UserFormScreenState extends State<UserFormScreen> {
                   controller: userNameController,
                   decoration: InputDecoration(
                     isDense: true,
-                    contentPadding: EdgeInsets.all(8),
+                    contentPadding: const EdgeInsets.all(8),
                     fillColor: Colors.white,
                     filled: true,
                     labelText: 'Nome',
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         width: 0,
                         style: BorderStyle.none,
                       ),
@@ -159,12 +161,12 @@ class _UserFormScreenState extends State<UserFormScreen> {
                   controller: userEmailController,
                   decoration: InputDecoration(
                     isDense: true,
-                    contentPadding: EdgeInsets.all(8),
+                    contentPadding: const EdgeInsets.all(8),
                     fillColor: Colors.white,
                     filled: true,
                     labelText: 'E-mail',
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         width: 0,
                         style: BorderStyle.none,
                       ),
@@ -182,12 +184,12 @@ class _UserFormScreenState extends State<UserFormScreen> {
                   controller: userPasswordController,
                   decoration: InputDecoration(
                     isDense: true,
-                    contentPadding: EdgeInsets.all(8),
+                    contentPadding: const EdgeInsets.all(8),
                     fillColor: Colors.white,
                     filled: true,
                     labelText: 'Password',
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         width: 0,
                         style: BorderStyle.none,
                       ),
@@ -196,7 +198,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
               Center(
@@ -206,14 +208,14 @@ class _UserFormScreenState extends State<UserFormScreen> {
                   ),
                   onPressed: () {},
                   child: Container(
-                    margin: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     height: 35,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: InkWell(
                       onTap: _submitForm,
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Criar Conta',
                           textAlign: TextAlign.center,
@@ -230,7 +232,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
               Center(
                 child: TextButton(
                   onPressed: () {},
-                  child: Text('Voce ja tem conta? Login'),
+                  child: const Text('Voce ja tem conta? Login'),
                 ),
               )
             ],

@@ -33,11 +33,11 @@ class VaccineForm extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: TextField(
               controller: nameController,
               onSubmitted: (_) => _submitForm(),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 label: Text('Nome'),
               ),
             ),
@@ -46,7 +46,7 @@ class VaccineForm extends StatelessWidget {
             color: Colors.blue,
             child: TextButton(
               onPressed: _submitForm,
-              child: Text(
+              child: const Text(
                 'Adicionar',
                 style: TextStyle(
                   color: Colors.white,

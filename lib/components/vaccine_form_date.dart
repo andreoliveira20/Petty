@@ -79,7 +79,7 @@ class _VaccineFormState extends State<VaccineFormDate> {
     return Card(
       child: Column(
         children: [
-          Text('Data da aplicacao'),
+          const Text('Data da aplicacao'),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 128),
             child: Row(
@@ -94,7 +94,7 @@ class _VaccineFormState extends State<VaccineFormDate> {
                     onChanged: (String value) {
                       dayTime = value;
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       counterText: '',
                     ),
                     keyboardType: TextInputType.datetime,
@@ -103,7 +103,7 @@ class _VaccineFormState extends State<VaccineFormDate> {
                     )}',
                   ),
                 ),
-                Text(
+                const Text(
                   '/',
                   style: TextStyle(
                     fontSize: 20,
@@ -119,7 +119,7 @@ class _VaccineFormState extends State<VaccineFormDate> {
                     onChanged: (String value) {
                       monthTime = value;
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       counterText: '',
                     ),
                     keyboardType: TextInputType.datetime,
@@ -128,7 +128,7 @@ class _VaccineFormState extends State<VaccineFormDate> {
                     )}',
                   ),
                 ),
-                Text(
+                const Text(
                   '/',
                   style: TextStyle(
                     fontSize: 20,
@@ -144,7 +144,7 @@ class _VaccineFormState extends State<VaccineFormDate> {
                     onChanged: (String value) {
                       yearTime = value;
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       counterText: '',
                     ),
                     keyboardType: TextInputType.datetime,
@@ -156,7 +156,7 @@ class _VaccineFormState extends State<VaccineFormDate> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Row(
@@ -171,14 +171,14 @@ class _VaccineFormState extends State<VaccineFormDate> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: timeMonth == dateTimeMonth.threeMonth
-                        ? Color.fromARGB(255, 255, 120, 1)
+                        ? const Color.fromARGB(255, 255, 120, 1)
                         : null,
                     border: Border.all(
                       width: 1,
                     ),
                   ),
-                  padding: EdgeInsets.all(10),
-                  child: Text('3 meses'),
+                  padding: const EdgeInsets.all(10),
+                  child: const Text('3 meses'),
                 ),
               ),
               InkWell(
@@ -190,14 +190,14 @@ class _VaccineFormState extends State<VaccineFormDate> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: timeMonth == dateTimeMonth.sixMonth
-                        ? Color.fromARGB(255, 255, 120, 1)
+                        ? const Color.fromARGB(255, 255, 120, 1)
                         : null,
                     border: Border.all(
                       width: 1,
                     ),
                   ),
-                  padding: EdgeInsets.all(10),
-                  child: Text('6 meses'),
+                  padding: const EdgeInsets.all(10),
+                  child: const Text('6 meses'),
                 ),
               ),
               InkWell(
@@ -209,25 +209,25 @@ class _VaccineFormState extends State<VaccineFormDate> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: timeMonth == dateTimeMonth.TwenthMonth
-                        ? Color.fromARGB(255, 255, 120, 1)
+                        ? const Color.fromARGB(255, 255, 120, 1)
                         : null,
                     border: Border.all(
                       width: 1,
                     ),
                   ),
-                  padding: EdgeInsets.all(10),
-                  child: Text('12 meses'),
+                  padding: const EdgeInsets.all(10),
+                  child: const Text('12 meses'),
                 ),
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           ElevatedButton(
             onPressed: _submitForm,
-            child: Padding(
-              padding: const EdgeInsets.all(15),
+            child: const Padding(
+              padding: EdgeInsets.all(15),
               child: Text(
                 'Registrar',
                 style: TextStyle(

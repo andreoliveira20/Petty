@@ -77,7 +77,7 @@ class _PetFormScreenState extends State<PetFormScreen> {
           weightController.text,
         );
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Pet adicionado com sucesso'),
             duration: Duration(seconds: 2),
           ),
@@ -92,7 +92,7 @@ class _PetFormScreenState extends State<PetFormScreen> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 24, 16, 64),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_outlined,
             color: Colors.white,
           ),
@@ -137,7 +137,7 @@ class _PetFormScreenState extends State<PetFormScreen> {
                           )
                         : IconButton(
                             onPressed: _takePictureGallery,
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.add,
                               size: 30,
                             ),
@@ -149,7 +149,7 @@ class _PetFormScreenState extends State<PetFormScreen> {
                     bottom: 0,
                     child: IconButton(
                       onPressed: _takePictureCamera,
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.camera_alt,
                         size: 30,
                       ),
@@ -158,11 +158,11 @@ class _PetFormScreenState extends State<PetFormScreen> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
-              children: [
+              children: const [
                 SizedBox(
                   width: 100,
                 ),
@@ -249,7 +249,7 @@ class _PetFormScreenState extends State<PetFormScreen> {
                   filled: true,
                   labelText: 'Nome',
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       width: 0,
                       style: BorderStyle.none,
                     ),
@@ -272,7 +272,7 @@ class _PetFormScreenState extends State<PetFormScreen> {
                   filled: true,
                   labelText: 'Raca',
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       width: 0,
                       style: BorderStyle.none,
                     ),
@@ -296,7 +296,7 @@ class _PetFormScreenState extends State<PetFormScreen> {
                   filled: true,
                   labelText: 'Idade',
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       width: 0,
                       style: BorderStyle.none,
                     ),
@@ -320,7 +320,7 @@ class _PetFormScreenState extends State<PetFormScreen> {
                   filled: true,
                   labelText: 'Peso',
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       width: 0,
                       style: BorderStyle.none,
                     ),
@@ -340,7 +340,7 @@ class _PetFormScreenState extends State<PetFormScreen> {
                     borderRadius: BorderRadius.circular(15),
                     color: Color.fromARGB(255, 24, 16, 64),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       'Adicionar Pet',
                       textAlign: TextAlign.center,

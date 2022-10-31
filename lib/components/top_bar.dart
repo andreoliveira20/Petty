@@ -3,13 +3,13 @@ import 'package:intl/intl.dart';
 import 'package:petty/models/user_model.dart';
 
 class TopBar extends StatelessWidget {
-  TopBar({required this.user});
+  const TopBar({Key? key, required this.user}) : super(key: key);
   final User user;
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 152,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40)),
         color: Color.fromARGB(255, 24, 16, 64),
       ),
@@ -19,7 +19,7 @@ class TopBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
@@ -48,15 +48,11 @@ class TopBar extends StatelessWidget {
             ),
             Text(
               '${DateFormat('d MMM y').format(DateTime.now())}',
-              style: TextStyle(color: Colors.white),
+              style: Theme.of(context).textTheme.headline3,
             ),
             Text(
               'Ola, ${user.name}',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.white,
-              ),
+              style: Theme.of(context).textTheme.headline2,
             ),
           ],
         ),

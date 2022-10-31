@@ -7,12 +7,12 @@ class BottomMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      color: Color(0xff13293d),
+      color: const Color(0xff13293d),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.home,
               size: 35,
               color: Colors.white,
@@ -20,7 +20,7 @@ class BottomMenu extends StatelessWidget {
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.favorite,
               size: 35,
               color: Colors.white,
@@ -28,7 +28,7 @@ class BottomMenu extends StatelessWidget {
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.newspaper,
               size: 35,
               color: Colors.white,
@@ -36,7 +36,7 @@ class BottomMenu extends StatelessWidget {
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.person,
               size: 35,
               color: Colors.white,

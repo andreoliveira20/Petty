@@ -8,6 +8,8 @@ import 'package:petty/models/vaccine_model.dart';
 import 'package:provider/provider.dart';
 
 class PetDetailScreen extends StatefulWidget {
+  const PetDetailScreen({Key? key}) : super(key: key);
+
   @override
   State<PetDetailScreen> createState() => _PetDetailScreenState();
 }
@@ -23,7 +25,7 @@ class _PetDetailScreenState extends State<PetDetailScreen> {
         provider.addVaccine(vaccine);
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Vacina adicionada com sucesso'),
           duration: Duration(seconds: 2),
         ),
@@ -43,7 +45,7 @@ class _PetDetailScreenState extends State<PetDetailScreen> {
 
     return Scaffold(
       body: Container(
-        color: Color.fromARGB(255, 230, 230, 230),
+        color: Theme.of(context).backgroundColor,
         child: Column(
           children: [
             BannerPet(pet: pet),
@@ -51,7 +53,7 @@ class _PetDetailScreenState extends State<PetDetailScreen> {
               future: provider.loadVaccine(pet),
               builder: (BuildContext context, snapshot) =>
                   snapshot.connectionState == ConnectionState.waiting
-                      ? Center(
+                      ? const Center(
                           child: CircularProgressIndicator(),
                         )
                       : Expanded(
@@ -68,9 +70,9 @@ class _PetDetailScreenState extends State<PetDetailScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 24, 16, 64),
+        backgroundColor: const Color.fromARGB(255, 24, 16, 64),
         onPressed: () => openTransactionFormModal(context),
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:petty/provider/settings.dart';
 import 'package:petty/provider/user.dart';
 import 'package:petty/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
-class Settings extends StatelessWidget {
-  const Settings({Key? key}) : super(key: key);
+import '../main.dart';
+
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<Users>(context);
+    // final settings = Provider.of<Settings>(context);
     return Container(
       color: Color.fromARGB(255, 24, 16, 64),
       child: Container(
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 230, 230, 230),
-          borderRadius: BorderRadius.only(topRight: Radius.circular(40)),
+          color: Theme.of(context).backgroundColor,
+          borderRadius: const BorderRadius.only(topRight: Radius.circular(40)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(15),
@@ -49,39 +53,44 @@ class Settings extends StatelessWidget {
                         Navigator.of(context).pushNamed(AppRoutes.USER_FORM),
                     icon: Icon(Icons.arrow_forward_ios_outlined)),
               ),
-              Divider(
+              const Divider(
                 height: 1,
                 color: Colors.black,
               ),
               ListTile(
                 leading: Icon(Icons.dark_mode),
                 title: Text('Dark Mode'),
-                trailing: Switch(value: false, onChanged: null),
+                trailing: Switch(
+                  value: settings.isDarkMode,
+                  onChanged: (value) {
+                    settings.switchTheme();
+                  },
+                ),
               ),
-              Divider(
+              const Divider(
                 height: 1,
                 color: Colors.black,
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.person),
                 title: Text('Editar Perfil'),
                 trailing: Icon(Icons.arrow_forward_ios_outlined),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.key),
                 title: Text('Mudar Senha'),
                 trailing: Icon(Icons.arrow_forward_ios_outlined),
               ),
-              Divider(
+              const Divider(
                 height: 1,
                 color: Colors.black,
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.notifications),
                 title: Text('Notificacoes'),
                 trailing: Switch(value: false, onChanged: null),
               ),
-              Divider(
+              const Divider(
                 height: 1,
                 color: Colors.black,
               ),
@@ -94,7 +103,7 @@ class Settings extends StatelessWidget {
                   icon: Icon(Icons.arrow_forward_ios_outlined),
                 ),
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.logout),
                 title: Text('Log Out'),
                 trailing: Icon(Icons.arrow_forward_ios_outlined),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petty/provider/settings.dart';
 import 'package:petty/provider/user.dart';
 import 'package:petty/provider/vaccine_date_list.dart';
 import 'package:petty/provider/vaccine_list.dart';
@@ -8,13 +9,15 @@ import 'package:petty/screen/language_screen.dart';
 import 'package:petty/screen/pet_detail_screen.dart';
 import 'package:petty/screen/user_form_screen.dart';
 
-import 'package:petty/shared/themes/app_colors.dart';
+import 'package:petty/shared/themes/app_theme.dart';
 import 'package:petty/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
 }
+
+final settings = Settings();
 
 class MyApp extends StatelessWidget {
   @override
@@ -33,19 +36,26 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => VaccineDateList(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => Settings(),
+        )
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Petty',
-        theme: ThemeData(
-          useMaterial3: true,
-          scaffoldBackgroundColor: AppColors.background,
-        ),
-        routes: {
-          AppRoutes.HOME: (ctx) => HomePage(),
-          AppRoutes.PET_DETAIL: (ctx) => PetDetailScreen(),
-          AppRoutes.USER_FORM: (ctx) => UserFormScreen(),
-          AppRoutes.LANGUAGE: (ctx) => LanguageScreen(),
+      child: AnimatedBuilder(
+        animation: settings,
+        builder: (BuildContext context, Widget? child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: settings.themeMode,
+            title: 'Petty',
+            theme: AppTheme.lightTheme,
+            routes: {
+              AppRoutes.HOME: (ctx) => HomePage(),
+              AppRoutes.PET_DETAIL: (ctx) => PetDetailScreen(),
+              AppRoutes.USER_FORM: (ctx) => UserFormScreen(),
+              AppRoutes.LANGUAGE: (ctx) => LanguageScreen(),
+            },
+          );
         },
       ),
     );

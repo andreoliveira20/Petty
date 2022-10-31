@@ -4,7 +4,7 @@ import 'package:petty/provider/pet_list.dart';
 import 'package:provider/provider.dart';
 
 class BannerPet extends StatelessWidget {
-  BannerPet({required this.pet});
+  const BannerPet({Key? key, required this.pet}) : super(key: key);
   final Pet pet;
 
   @override
@@ -30,12 +30,12 @@ class BannerPet extends StatelessWidget {
           child: Container(
             height: 70,
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
                 colors: [
-                  Color.fromRGBO(0, 0, 0, 0.6),
+                  const Color.fromRGBO(0, 0, 0, 0.6),
                   Color.fromRGBO(0, 0, 0, 0),
                 ],
               ),
@@ -44,16 +44,16 @@ class BannerPet extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.pets,
                     color: Colors.white,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Text(
                     pet.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 28,
@@ -66,7 +66,7 @@ class BannerPet extends StatelessWidget {
         ),
         Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 230,
             ),
             Row(
@@ -76,12 +76,12 @@ class BannerPet extends StatelessWidget {
                   height: 50,
                   width: 120,
                   child: Card(
-                    color: Color.fromARGB(255, 241, 232, 219).withOpacity(0.9),
+                    color: Theme.of(context).cardColor,
                     elevation: 5,
                     child: Center(
                       child: Text(
                         'Idade: ${pet.age}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -94,13 +94,12 @@ class BannerPet extends StatelessWidget {
                     height: 50,
                     width: 100,
                     child: Card(
-                      color:
-                          Color.fromARGB(255, 241, 232, 219).withOpacity(0.9),
+                      color: Theme.of(context).cardColor,
                       elevation: 5,
                       child: Center(
                         child: Text(
                           'Peso: ${pet.weight} Kg',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -112,12 +111,12 @@ class BannerPet extends StatelessWidget {
                   height: 50,
                   width: 100,
                   child: Card(
-                    color: Color.fromARGB(255, 241, 232, 219).withOpacity(0.9),
+                    color: Theme.of(context).cardColor,
                     elevation: 5,
                     child: Center(
                       child: Text(
                         'Sexo: ${pet.sex}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w500,
                         ),
                       ),

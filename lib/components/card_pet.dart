@@ -49,27 +49,19 @@ class CardPet extends StatelessWidget {
                   children: [
                     Text(
                       pet.breed,
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
+                      style: Theme.of(context).textTheme.headline4,
                     ),
                     Text(
                       pet.name,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                        color: Colors.black,
-                      ),
+                      style: Theme.of(context).textTheme.headline5,
                     ),
                     Text(
                       '${pet.age} anos',
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
+                      style: Theme.of(context).textTheme.headline4,
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
                     onPressed: () =>
                         Provider.of<PetList>(context, listen: false)

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:petty/components/top_bar.dart';
-import 'package:petty/provider/pet_list.dart';
 import 'package:petty/provider/user.dart';
 import 'package:petty/screen/pet_list_screen.dart';
-import 'package:petty/screen/settings.dart';
+import 'package:petty/screen/settings.screen.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,12 +21,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final List pets = Provider.of<PetList>(context).pets;
     final userProvider = Provider.of<Users>(context);
 
     List<Widget> _widgetOptions = <Widget>[
       PetListScreen(),
-      Settings(),
+      SettingsScreen(),
     ];
 
     return Scaffold(
@@ -37,7 +35,7 @@ class _HomePageState extends State<HomePage> {
           future: userProvider.loadUser(),
           builder: (BuildContext context, snapshot) =>
               snapshot.connectionState == ConnectionState.waiting
-                  ? Center(
+                  ? const Center(
                       child: CircularProgressIndicator(),
                     )
                   : TopBar(
@@ -50,7 +48,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color.fromARGB(255, 24, 16, 64),
-        items: <BottomNavigationBarItem>[
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
               Icons.pets,

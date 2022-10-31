@@ -5,16 +5,18 @@ import 'package:petty/screen/pet_form_screen.dart';
 import 'package:provider/provider.dart';
 
 class PetListScreen extends StatelessWidget {
+  const PetListScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<PetList>(context);
 
     return Scaffold(
       body: Container(
-        color: Color.fromARGB(255, 24, 16, 64),
+        color: const Color.fromARGB(255, 24, 16, 64),
         child: Container(
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 230, 230, 230),
+            color: Theme.of(context).backgroundColor,
             borderRadius: BorderRadius.only(topRight: Radius.circular(40)),
           ),
           child: Padding(
@@ -24,16 +26,13 @@ class PetListScreen extends StatelessWidget {
               children: [
                 Text(
                   'Meus Pets',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(context).textTheme.headline1,
                 ),
                 FutureBuilder(
                   future: provider.loadPets(),
                   builder: (BuildContext context, snapshot) =>
                       snapshot.connectionState == ConnectionState.waiting
-                          ? Center(
+                          ? const Center(
                               child: CircularProgressIndicator(),
                             )
                           : Expanded(
@@ -58,7 +57,7 @@ class PetListScreen extends StatelessWidget {
             MaterialPageRoute(builder: (context) => PetFormScreen()),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

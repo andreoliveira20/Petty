@@ -32,7 +32,7 @@ class _VaccineCardState extends State<VaccineCard>
 
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
     );
 
     _opacityAnimation = Tween(
@@ -66,6 +66,7 @@ class _VaccineCardState extends State<VaccineCard>
     final provider = Provider.of<VaccineList>(context);
     final vaccineDate = Provider.of<VaccineDateList>(context);
     final count = vaccineDate.vaccineDateCount;
+    double maxHeightWidget = 60.0 * count;
 
     openTransactionFormModal(BuildContext context) {
       showModalBottomSheet(
@@ -82,8 +83,9 @@ class _VaccineCardState extends State<VaccineCard>
       child: Column(
         children: [
           Card(
+            color: Theme.of(context).cardColor,
             elevation: 5,
-            margin: EdgeInsets.all(8),
+            margin: const EdgeInsets.all(8),
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 8,
@@ -91,18 +93,18 @@ class _VaccineCardState extends State<VaccineCard>
               ),
               child: Row(
                 children: [
-                  Icon(Icons.vaccines),
-                  SizedBox(
+                  const Icon(Icons.vaccines),
+                  const SizedBox(
                     width: 20,
                   ),
                   Text(
                     widget.vaccine.vaccinename,
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   IconButton(
                     onPressed: () => provider.deleteVaccine(widget.vaccine.id),
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.delete,
                       color: Colors.redAccent,
                     ),
@@ -120,7 +122,7 @@ class _VaccineCardState extends State<VaccineCard>
           ),
           SingleChildScrollView(
             child: AnimatedContainer(
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               constraints: BoxConstraints(
                 minHeight: isSelected ? 60 : 0,
                 maxHeight: isSelected ? 200 : 0,
@@ -134,8 +136,8 @@ class _VaccineCardState extends State<VaccineCard>
                       future: vaccineDate.loadVaccineDate(widget.vaccine),
                       builder: (BuildContext context, snapshot) =>
                           snapshot.connectionState == ConnectionState.waiting
-                              ? Center(
-                                  child: CircularProgressIndicator(),
+                              ? const Center(
+                                  child: const CircularProgressIndicator(),
                                 )
                               : Expanded(
                                   child: ListView.builder(
@@ -151,7 +153,7 @@ class _VaccineCardState extends State<VaccineCard>
                     ),
                     IconButton(
                       onPressed: () => openTransactionFormModal(context),
-                      icon: Icon(Icons.add),
+                      icon: const Icon(Icons.add),
                     ),
                   ],
                 ),

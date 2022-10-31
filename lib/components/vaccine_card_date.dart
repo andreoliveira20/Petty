@@ -3,16 +3,19 @@ import 'package:intl/intl.dart';
 import 'package:petty/models/vaccine_date_model.dart';
 
 class VaccineCardDate extends StatelessWidget {
-  VaccineCardDate({required this.vaccineDate, required this.onRemove});
+  VaccineCardDate({Key? key, required this.vaccineDate, required this.onRemove})
+      : super(key: key);
   final VaccineModelDate vaccineDate;
   void Function(String) onRemove;
 
   bool dateExpiredFunction() {
-    if (DateTime.now().year >= vaccineDate.date.add(Duration(days: 365)).year) {
+    int dateLimit = int.parse(vaccineDate.dateLimit) * 30;
+    if (DateTime.now().year >=
+        vaccineDate.date.add(Duration(days: dateLimit)).year) {
       if (DateTime.now().month >=
-          vaccineDate.date.add(Duration(days: 365)).month) {
+          vaccineDate.date.add(Duration(days: dateLimit)).month) {
         if (DateTime.now().day >
-            vaccineDate.date.add(Duration(days: 365)).day) {
+            vaccineDate.date.add(Duration(days: dateLimit)).day) {
           return true;
         } else {
           return false;
@@ -31,9 +34,9 @@ class VaccineCardDate extends StatelessWidget {
     bool dateExpired = dateExpiredFunction();
 
     return Container(
-        margin: EdgeInsets.symmetric(vertical: 5),
+        margin: const EdgeInsets.symmetric(vertical: 5),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.horizontal(
             left: Radius.circular(50),
             right: Radius.circular(50),
@@ -46,12 +49,12 @@ class VaccineCardDate extends StatelessWidget {
               CircleAvatar(
                 backgroundColor: dateExpired ? Colors.red : Colors.green,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Column(
                 children: [
-                  Text(
+                  const Text(
                     'Aplicacao',
                     style: TextStyle(
                       fontSize: 17,
@@ -63,14 +66,14 @@ class VaccineCardDate extends StatelessWidget {
                   )}')
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 width: 40,
               ),
               Column(
                 children: [
-                  Text(
+                  const Text(
                     'Vencimento',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
                     ),
@@ -80,10 +83,10 @@ class VaccineCardDate extends StatelessWidget {
                   )}'),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               IconButton(
                 onPressed: () => onRemove(vaccineDate.id),
-                icon: Icon(
+                icon: const Icon(
                   Icons.delete,
                   color: Colors.red,
                 ),
